@@ -30,9 +30,14 @@
 			chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
 		}
 		chainRx.onClick((posX, posY) => {
-			chainRx.addBall({ speedX: 0, speedY: 0, color: "gray"})
-			chainRx.explode(posX, posY, 10);
+			//chainRx.addBall({ speedX: 0, speedY: 0, color: "gray"})
+			chainRx.explode(posX, posY, 20);
+      
 		})
+    chainRx.onTouchExplosion((posX, posY, ballId) => {
+      chainRx.explode(posX, posY, 30)
+      chainRx.removeBall(ballId)
+    });
   </script>
 </body>
 
