@@ -37,7 +37,13 @@
     chainRx.onTouchExplosion((posX, posY, ballId) => {
       chainRx.explode(posX, posY, 30)
       chainRx.removeBall(ballId)
+      if (chainRx.isEmpty()){
+        chainRx.reset()
+      }
     });
+    if (chainRx.isEmpty()){
+      chainRx.reset()
+    }
   </script>
 </body>
 
