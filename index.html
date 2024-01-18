@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    #chain-reaction {
+      border: 1px solid #000;
+      margin: 10px;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="chain-reaction"></div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <script src="./chain-reaction.js"></script>
+
+  <script>
+    // Documentation:
+    // https://gist.github.com/xavi-/54bd4f27af9e4e64f9a161dc58861555
+    let chainRx = new ChainReaction("#chain-reaction", 400, 400);
+		let colors = ["red", "orange", 'green', 'blue', 'purple', 'pink', 'yellow', 'black', 'white', 'brown', 'light blue'];
+    for (let i = 0; i < 11; i++){
+			chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
+		}
+		chainRx.onClick((posX, posY) => {
+			chainRx.addBall({ speedX: 0, speedY: 0, color: "gray"})
+			chainRx.explode(posX, posY, 10);
+		})
+  </script>
+</body>
+
+</html>
