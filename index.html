@@ -27,9 +27,9 @@
     // Documentation:
     // https://gist.github.com/xavi-/54bd4f27af9e4e64f9a161dc58861555
 		let can_explode = true;
-		let goal = 2;
+		let goal = 9;
 		let can_start = true;
-    let chainRx = new ChainReaction("#chain-reaction", 400, 400);
+    let chainRx = new ChainReaction("#chain-reaction", 800, 800);
 		let colors = ["red", "orange", 'green', 'blue', 'purple', 'pink', 'yellow', 'black', 'white', 'brown', 'light blue'];
     //for (let i = 0; i < 11; i++){
 			//chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
@@ -45,7 +45,7 @@
     chainRx.onTouchExplosion((posX, posY, ballId) => {
       chainRx.explode(posX, posY, 30)
       chainRx.removeBall(ballId)
-      if (chainRx.ballCount() == (11 - goal)) {
+      if (chainRx.ballCount() == (20 - goal)) {
         $("#win").text("You win!");
       }
       if (chainRx.isEmpty()){
@@ -61,7 +61,7 @@
 			can_explode = true;
 			can_start = true;
 			if(can_start) {
-				for (let i = 0; i < 11; i++){
+				for (let i = 0; i < 20; i++){
 					chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
 				}
 				can_start = false;
