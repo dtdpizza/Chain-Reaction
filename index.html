@@ -29,6 +29,7 @@
     // https://gist.github.com/xavi-/54bd4f27af9e4e64f9a161dc58861555
 		let can_explode = true;
     let points = 0;
+    let speed = 20;
 		let goal = 19;
 		let can_start = true;
     let chainRx = new ChainReaction("#chain-reaction", 800, 800);
@@ -70,7 +71,7 @@
 			can_start = true;
 			if(can_start) {
         for (let i = 0; i < 60; i++){
-          chainRx.addBall({ color: colors[i%10], posX: 400, posY: 400});
+          chainRx.addBall({ color: colors[i%10], posX: 400, posY: 400, speedX: speed, speedY: speed});
         }
 				can_start = false;
 			}
