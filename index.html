@@ -14,6 +14,8 @@
 <body>
 
   <div id="chain-reaction"></div>
+	<button id="new-game">New game</button>
+	<p> <span id="win"></span></p>
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -24,15 +26,20 @@
   <script>
     // Documentation:
     // https://gist.github.com/xavi-/54bd4f27af9e4e64f9a161dc58861555
+		let can_explode = true;
+		let goal = 2;
+		let can_start = true;
     let chainRx = new ChainReaction("#chain-reaction", 400, 400);
 		let colors = ["red", "orange", 'green', 'blue', 'purple', 'pink', 'yellow', 'black', 'white', 'brown', 'light blue'];
-    for (let i = 0; i < 11; i++){
-			chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
-		}
+    //for (let i = 0; i < 11; i++){
+			//chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
+		//}
 		chainRx.onClick((posX, posY) => {
 			//chainRx.addBall({ speedX: 0, speedY: 0, color: "gray"})
-			chainRx.explode(posX, posY, 20);
-      
+			if (can_explode) {
+				chainRx.explode(posX, posY, 20);
+	      can_explode = false;
+			}
 		})
     chainRx.onTouchExplosion((posX, posY, ballId) => {
       chainRx.explode(posX, posY, 30)
@@ -44,6 +51,91 @@
     if (chainRx.isEmpty()){
       chainRx.reset()
     }
+		$("#new-game").click(() => {
+			chainRx.reset()
+			can_explode = true;
+			can_start = true;
+			if(can_start) {
+				for (let i = 0; i < 11; i++){
+					chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
+				}
+				can_start = false;
+			}
+		});
+		if chainRx.ball_count() == (11 - goal) {
+			$("#win").text("You win!");;
+		}
+  </script>
+</body>
+
+</html><!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    #chain-reaction {
+      border: 1px solid #000;
+      margin: 10px;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="chain-reaction"></div>
+	<button id="new-game">New game</button>
+	<p> <span id="win"></span></p>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <script src="./chain-reaction.js"></script>
+
+  <script>
+    // Documentation:
+    // https://gist.github.com/xavi-/54bd4f27af9e4e64f9a161dc58861555
+		let can_explode = true;
+		let goal = 2;
+		let can_start = true;
+    let chainRx = new ChainReaction("#chain-reaction", 400, 400);
+		let colors = ["red", "orange", 'green', 'blue', 'purple', 'pink', 'yellow', 'black', 'white', 'brown', 'light blue'];
+    //for (let i = 0; i < 11; i++){
+			//chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
+		//}
+		chainRx.onClick((posX, posY) => {
+			//chainRx.addBall({ speedX: 0, speedY: 0, color: "gray"})
+			if (can_explode) {
+				chainRx.explode(posX, posY, 20);
+	      can_explode = false;
+
+			}
+		})
+    chainRx.onTouchExplosion((posX, posY, ballId) => {
+      chainRx.explode(posX, posY, 30)
+      chainRx.removeBall(ballId)
+      if (chainRx.ballCount() == (11 - goal)) {
+        $("#win").text("You win!");;
+      }
+      if (chainRx.isEmpty()){
+        chainRx.reset()
+      }
+    });
+    if (chainRx.isEmpty()){
+      chainRx.reset()
+    }
+		$("#new-game").click(() => {
+			chainRx.reset()
+			can_explode = true;
+			can_start = true;
+			if(can_start) {
+				for (let i = 0; i < 11; i++){
+					chainRx.addBall({ color: colors[i], posX: 390, posY: 10});
+				}
+				can_start = false;
+			}
+		});
   </script>
 </body>
 
