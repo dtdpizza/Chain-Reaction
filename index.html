@@ -71,7 +71,7 @@
 			can_start = true;
 			if(can_start) {
         for (let i = 0; i < 60; i++){
-          chainRx.addBall({ color: colors[i%10], posX: 400, posY: 400, speedX: speed, speedY: speed});
+          chainRx.addBall({ color: colors[i%10], posX: 400, posY: 400, speedX: 610 * Math.random() - 305, speedY: 610 * Math.random() - 305,});
         }
 				can_start = false;
 			}
